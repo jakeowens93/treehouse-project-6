@@ -4,7 +4,7 @@ let missed = 0;
 const btnReset = document.querySelector('.btn__reset');
 const phrases = [
     "hello bitch",
-    "you had all summer to figure out what you do",
+    "bilb ono",
     "bart harley jarvis",
     "hot topic pastor",
     "newt gingrich eating chili"
@@ -29,22 +29,34 @@ const phraseArray = getRandomPhraseAsArray(phrases);
 
 // ======== Set the Game Display ========= //
 function addPhraseToDisplay(){
-    // do stuff any arr that is passed in, and add to `#phrase ul`
     for (var i = 0; i < phraseArray.length; i++){
         var li = document.createElement('li');
-        var text = document.createTextNode(phraseArray[i]);
+        const character = phraseArray[i];
+        var text = document.createTextNode(character);
         li.appendChild(text);
         document.getElementById("phrase").appendChild(li);
-        
-        // phraseArray[i];
-        // const ul = document.querySelector('#phrase ul');
-        // list = document.createElement('li');
-        // list.appendChild(text);
-        // ul.appendChild(list);
+        if (character === " "){
+            li.classList.add("space");
+        } else { 
+            li.classList.add("letter");
+        }
         console.log(li);
     }
 }
 addPhraseToDisplay(phraseArray);
 
 // ======== Letter Checker Function ======== //
-// function checkLetter()
+function checkLetter(button){
+    // get all of the elements with the class of "letter"
+    let letters = document.querySelectorAll('li');
+    // loop over the letters and check if they match the chosen letter
+    for (var i = 0; i < letters.length; i++) {
+        if (button === letters[i].textContent.toLowerCase()){
+            li.classList.add("show");
+        } else { 
+            return null;
+        }
+    }
+}
+
+//========= Keyboard Event Listener ======== //
