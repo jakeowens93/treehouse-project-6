@@ -47,11 +47,10 @@ addPhraseToDisplay(phraseArray);
 
 // ======== Letter Checker Function ======== //
 function checkLetter(button){
-    // get all of the elements with the class of "letter"
-    let letters = document.querySelectorAll('li');
-    // loop over the letters and check if they match the chosen letter
+    let letters = document.querySelectorAll('#phrase li');
+    const buttonLetter = button.textContent;
     for (var i = 0; i < letters.length; i++) {
-        if (button === letters[i].textContent.toLowerCase()){
+        if (buttonLetter === letters[i].textContent.toLowerCase()){
             li.classList.add("show");
         } else { 
             return null;
@@ -60,3 +59,11 @@ function checkLetter(button){
 }
 
 //========= Keyboard Event Listener ======== //
+qwerty.addEventListener('click', (e) => {
+    let btn = e.target;
+    if(btn.className === 'chosen' || btn.parentNode.className !== 'keyrow'){
+        return null;
+    }
+    btn.classList.add('chosen');
+    let check = checkLetter(btn);
+});
