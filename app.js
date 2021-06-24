@@ -65,5 +65,6 @@ qwerty.addEventListener('click', (e) => {
         return null;
     }
     btn.classList.add('chosen');
+    btn.disabled = true;
     let check = checkLetter(btn);
 });
