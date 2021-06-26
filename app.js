@@ -3,8 +3,8 @@ const phrase = document.getElementById('phrase');
 let missed = 0; 
 const btnReset = document.querySelector('.btn__reset');
 const phrases = [
-    "hello bitch",
-    "bilb ono",
+    "worm hat",
+    "denim chicken",
     "bart harley jarvis",
     "hot topic pastor",
     "newt gingrich eating chili"
@@ -40,31 +40,41 @@ function addPhraseToDisplay(){
         } else { 
             li.classList.add("letter");
         }
+// ====== Print random phrase to console for testing purposes ====== //
         console.log(li);
     }
 }
 addPhraseToDisplay(phraseArray);
 
 // ======== Letter Checker Function ======== //
-function checkLetter(button){
-    let letters = document.querySelectorAll('#phrase li');
+const checkLetter = button => {
+    const letters = document.querySelectorAll('li.letter');
+    let match = null;
     const buttonLetter = button.textContent;
     for (var i = 0; i < letters.length; i++) {
-        if (buttonLetter === letters[i].textContent.toLowerCase()){
-            li.classList.add("show");
+        const li = letters[i];
+        if (buttonLetter === li.textContent.toLowerCase()){
+            letters[i].className = "show";
+            match = button.textContent;
         } else { 
             return null;
         }
     }
 }
+//========= CheckWin Function ======== //
+function checkWin (){
+
+}
 
 //========= Keyboard Event Listener ======== //
-qwerty.addEventListener('click', (e) => {
+qwerty.addEventListener('click', e => {
     let btn = e.target;
     if(btn.className === 'chosen' || btn.parentNode.className !== 'keyrow'){
         return null;
     }
-    btn.classList.add('chosen');
+    btn.className = 'chosen';
     btn.disabled = true;
-    let check = checkLetter(btn);
+   var letterFound = checkLetter(btn);
+  
 });
+
