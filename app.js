@@ -47,17 +47,34 @@ function addPhraseToDisplay(){
 addPhraseToDisplay(phraseArray);
 
 // ======== Letter Checker Function ======== //
-const checkLetter = button => {
-    const letters = document.querySelectorAll('li.letter');
+// function checkLetter(button){
+//     const letters = document.querySelectorAll('li.letter');
+//     let match = null;
+//     const buttonLetter = button.textContent;
+//     for (var i = 0; i < letters.length; i++) {
+//         const li = letters[i];
+//         if (buttonLetter === li.textContent.toLowerCase()){
+//             letters[i].classList.add("show");
+//             match = button.textContent;
+//         } else { 
+//             return match;
+//         }
+//     }
+// }
+
+
+function checkLetter(button){
+    const letters = document.querySelectorAll('#phrase li');
     let match = null;
     const buttonLetter = button.textContent;
     for (var i = 0; i < letters.length; i++) {
-        const li = letters[i];
+        var li = letters[i];
+        
         if (buttonLetter === li.textContent.toLowerCase()){
-            letters[i].className = "show";
-            match = button.textContent;
+            li.className += ' ' + 'show';
+            match = true;
         } else { 
-            return null;
+            return match;
         }
     }
 }
@@ -68,13 +85,13 @@ function checkWin (){
 
 //========= Keyboard Event Listener ======== //
 qwerty.addEventListener('click', e => {
-    let btn = e.target;
-    if(btn.className === 'chosen' || btn.parentNode.className !== 'keyrow'){
+    let button = e.target;
+    let letterFound = checkLetter(button);
+    if(button.className === 'chosen' || button.parentNode.className !== 'keyrow'){
         return null;
     }
-    btn.className = 'chosen';
-    btn.disabled = true;
-   var letterFound = checkLetter(btn);
+    button.className = 'chosen';
+    button.disabled = true;
   
 });
 
