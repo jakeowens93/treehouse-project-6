@@ -5,9 +5,9 @@ const btnReset = document.querySelector('.btn__reset');
 const phrases = [
     "worm hat",
     "denim chicken",
-    "bart harley jarvis",
-    "hot topic pastor",
-    "newt gingrich eating chili"
+    "night man",
+    "Thunder gun",
+    "night crawlers"
 ]
 
 // ======== Start Game Button ========= //
