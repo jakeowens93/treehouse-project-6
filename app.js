@@ -73,10 +73,9 @@ function checkLetter(button){
         if (buttonLetter === li.textContent.toLowerCase()){
             li.className += ' ' + 'show';
             match = true;
-        } else { 
-            return match;
-        }
+        }   
     }
+    return match;
 }
 //========= CheckWin Function ======== //
 function checkWin (){
