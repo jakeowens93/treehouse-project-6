@@ -7,7 +7,7 @@ const phrases = [
     "Worm Hat",
     "Denim Chicken",
     "Night Man",
-    "Thunder Gun",
+    "Donkey Brain",
     "Night Crawlers"
 ]
 
@@ -62,18 +62,23 @@ function checkLetter(button){
 }
 //========= CheckWin Function ======== //
 function checkWin (){
-    let showing = document.querySelectorAll('.show');
-    let letters = document.querySelectorAll('letters');
+    let phraseLetters = document.querySelectorAll('.show');
+    let guessedLetters = document.querySelectorAll('.letters');
     let title = document.querySelector('.title');
-    if ( showing.length === letters.length ){
-    //if equal, show "win" overlay screen.
-        overlay.style.display = 'block';
-        overlay.className += 'win' + 'start';
-        overlay.display = 'flex';
+
+    if (phraseLetters.length === guessedLetters.length){
+        overlay.classList.add('win');
         title.textContent = 'You Win!'
+        overlay.style.display = 'flex';
+        btnReset.textContent = 'Play Again';
     }
-    //if number of misses is >= 5, show the "lose" overlay
+    if (missed > 4){
+        overlay.classList.add('lose');
+        title.textContent = 'You Lose!';
+        overlay.style.display = 'flex';
+        btnReset.textContent = 'Play Again';
     }
+};
 
 //========= Keyboard Event Listener ======== //
 qwerty.addEventListener('click', e => {
@@ -84,7 +89,9 @@ qwerty.addEventListener('click', e => {
     }
     button.className = 'chosen';
     button.disabled = true;
+    const heart = document.querySelectorAll('.tries img');
     if (letterFound === null){
+        heart[missed].src = 'images/lostHeart.png';
         missed += 1;
     }
     checkWin()
