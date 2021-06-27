@@ -2,18 +2,18 @@ const querty = document.getElementById('querty');
 const phrase = document.getElementById('phrase');
 let missed = 0; 
 const btnReset = document.querySelector('.btn__reset');
+const overlay = document.getElementById('overlay');
 const phrases = [
-    "worm hat",
-    "denim chicken",
-    "night man",
-    "Thunder gun",
-    "night crawlers"
+    "Worm Hat",
+    "Denim Chicken",
+    "Night Man",
+    "Thunder Gun",
+    "Night Crawlers"
 ]
 
 // ======== Start Game Button ========= //
 
 btnReset.addEventListener('click', () => {
-    const overlay = document.getElementById('overlay');
     overlay.style.display = 'none';
 });
 
@@ -47,29 +47,12 @@ function addPhraseToDisplay(){
 addPhraseToDisplay(phraseArray);
 
 // ======== Letter Checker Function ======== //
-// function checkLetter(button){
-//     const letters = document.querySelectorAll('li.letter');
-//     let match = null;
-//     const buttonLetter = button.textContent;
-//     for (var i = 0; i < letters.length; i++) {
-//         const li = letters[i];
-//         if (buttonLetter === li.textContent.toLowerCase()){
-//             letters[i].classList.add("show");
-//             match = button.textContent;
-//         } else { 
-//             return match;
-//         }
-//     }
-// }
-
-
 function checkLetter(button){
     const letters = document.querySelectorAll('#phrase li');
     let match = null;
     const buttonLetter = button.textContent;
     for (var i = 0; i < letters.length; i++) {
         var li = letters[i];
-        
         if (buttonLetter === li.textContent.toLowerCase()){
             li.className += ' ' + 'show';
             match = true;
@@ -79,8 +62,18 @@ function checkLetter(button){
 }
 //========= CheckWin Function ======== //
 function checkWin (){
-
-}
+    let showing = document.querySelectorAll('.show');
+    let letters = document.querySelectorAll('letters');
+    let title = document.querySelector('.title');
+    if ( showing.length === letters.length ){
+    //if equal, show "win" overlay screen.
+        overlay.style.display = 'block';
+        overlay.className += 'win' + 'start';
+        overlay.display = 'flex';
+        title.textContent = 'You Win!'
+    }
+    //if number of misses is >= 5, show the "lose" overlay
+    }
 
 //========= Keyboard Event Listener ======== //
 qwerty.addEventListener('click', e => {
@@ -91,6 +84,9 @@ qwerty.addEventListener('click', e => {
     }
     button.className = 'chosen';
     button.disabled = true;
-  
+    if (letterFound === null){
+        missed += 1;
+    }
+    checkWin()
 });
 
