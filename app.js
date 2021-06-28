@@ -28,7 +28,7 @@ function getRandomPhraseAsArray (phrases) {
     return splitPhrase
 }
 
-const phraseArray = getRandomPhraseAsArray(phrases);
+let phraseArray = getRandomPhraseAsArray(phrases);
 
 // ======== Set the Game Display ========= //
 function addPhraseToDisplay(){
@@ -37,7 +37,7 @@ function addPhraseToDisplay(){
         const character = phraseArray[i];
         var text = document.createTextNode(character);
         li.appendChild(text);
-        document.getElementById("phrase").appendChild(li);
+        document.querySelector("#phrase ul").appendChild(li);
         if (character === " "){
             li.classList.add("space");
         } else { 
@@ -129,7 +129,7 @@ btnReset.addEventListener('click', () => {
         resetHearts();
         deletePhrase();
         resetButtons();
-        const phraseArray = getRandomPhraseAsArray(phrases);
-        addPhraseToDisplay(phraseArray);
+        let newPhrase = getRandomPhraseAsArray(phrases);
+        addPhraseToDisplay(newPhrase);
     }
 });
