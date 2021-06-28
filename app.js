@@ -3,6 +3,7 @@ const phrase = document.getElementById('phrase');
 let missed = 0; 
 const btnReset = document.querySelector('.btn__reset');
 const overlay = document.getElementById('overlay');
+const heart = document.querySelectorAll('.tries img');
 const phrases = [
     "Worm Hat",
     "Denim Chicken",
@@ -11,6 +12,8 @@ const phrases = [
     "Night Crawlers"
 ]
 
+
+
 // ======== Start Game Button ========= //
 
 btnReset.addEventListener('click', () => {
@@ -18,7 +21,7 @@ btnReset.addEventListener('click', () => {
 });
 
 // ======== Random Phrase Function ========= //
-function getRandomPhraseAsArray (arr) {
+function getRandomPhraseAsArray (phrases) {
     var randomNumber = Math.floor(Math.random()*phrases.length);
     var randomPhrase = phrases[randomNumber];
     var splitPhrase = randomPhrase.split('');
@@ -63,7 +66,7 @@ function checkLetter(button){
 //========= CheckWin Function ======== //
 function checkWin (){
     let phraseLetters = document.querySelectorAll('.show');
-    let guessedLetters = document.querySelectorAll('.letters');
+    let guessedLetters = document.querySelectorAll('.letter');
     let title = document.querySelector('.title');
 
     if (phraseLetters.length === guessedLetters.length){
@@ -89,7 +92,7 @@ qwerty.addEventListener('click', e => {
     }
     button.className = 'chosen';
     button.disabled = true;
-    const heart = document.querySelectorAll('.tries img');
+    
     if (letterFound === null){
         heart[missed].src = 'images/lostHeart.png';
         missed += 1;
@@ -97,3 +100,36 @@ qwerty.addEventListener('click', e => {
     checkWin()
 });
 
+// ======== Reset Functions ======== //
+
+function resetHearts(){
+    missed = 0;
+    for (let i = 0; i < heart.length; i++) {
+        heart[i].src ='images/liveHeart.png';
+    }
+};
+function deletePhrase(){
+    const oldPhrase = phrase.querySelectorAll('li');
+    for (let i = 0; i < oldPhrase.length; i++) {
+        let ul = oldPhrase[i].parentNode;
+        ul.removeChild(ul.firstElementChild);
+    }
+};
+function resetButtons(){
+    const buttons = document.getElementsByTagName('button');
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].className = '';
+        buttons[i].disabled = false;
+    }
+};
+
+btnReset.addEventListener('click', () => {
+    if (btnReset.textContent === 'Play Again'){
+        overlay.style.display = 'none';
+        resetHearts();
+        deletePhrase();
+        resetButtons();
+        const phraseArray = getRandomPhraseAsArray(phrases);
+        addPhraseToDisplay(phraseArray);
+    }
+});
