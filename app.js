@@ -31,7 +31,7 @@ function getRandomPhraseAsArray (phrases) {
 let phraseArray = getRandomPhraseAsArray(phrases);
 
 // ======== Set the Game Display ========= //
-function addPhraseToDisplay(){
+function addPhraseToDisplay(phraseArray){
     for (var i = 0; i < phraseArray.length; i++){
         var li = document.createElement('li');
         const character = phraseArray[i];
